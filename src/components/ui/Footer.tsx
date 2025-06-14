@@ -1,14 +1,26 @@
-import React from "react";
-import { navLinks } from "../header";
+import React, { use } from "react";
 import NavLink from "../header/NavLink";
+import { getCollectionData } from "@/helpers/payload";
+import { notFound } from "next/navigation";
+import { Navlink } from "@/payload-types";
 
 const Footer = () => {
+  const navLinksResult = use(
+    getCollectionData("navlink", {
+      sort: "createdAt",
+    }),
+  );
+
+  if (!navLinksResult) null
+
+  const navLinks = navLinksResult?.docs as Navlink[];
+
   return (
-    <footer className="container mx-auto flex justify-center gap-10 items-center p-4">
+    <footer className="container mx-auto flex items-center justify-center gap-10 p-4">
       <span>&copy; All Rights Reserverd {new Date().getFullYear()}</span>
       <div className="flex items-center gap-4">
         {navLinks.map(({ link, label }) => (
-          <NavLink label={label} link={link} />
+          <NavLink key={link} label={label} link={link} />
         ))}
       </div>
     </footer>

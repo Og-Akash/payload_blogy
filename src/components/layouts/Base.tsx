@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../header";
 import Footer from "../ui/Footer";
 
-const Base = ({ children }: { children: React.ReactNode }) => {
+const BaseLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Header />
@@ -14,4 +14,4 @@ const Base = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default Base;
+export default BaseLayout;

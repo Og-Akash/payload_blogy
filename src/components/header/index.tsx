@@ -1,15 +1,21 @@
 import Image from "next/image";
-import React from "react";
+import React, { use } from "react";
 import NavLink from "./NavLink";
 import Link from "next/link";
-
-export const navLinks = [
-  { label: "About", link: "/about" },
-  { label: "Blogs", link: "/blogs" },
-  { label: "Feedback", link: "/feedback" },
-];
+import { getCollectionData } from "@/helpers/payload";
+import { Navlink } from "@/payload-types";
 
 const Header = () => {
+  const navLinksResult = use(
+    getCollectionData("navlink", {
+      sort: "createdAt",
+    }),
+  );
+
+  if (!navLinksResult) null;
+
+  const navLinks = navLinksResult?.docs as Navlink[];
+
   return (
     <header aria-label="site-header">
       <nav className="container mx-auto flex items-center justify-between p-4">
@@ -26,8 +32,8 @@ const Header = () => {
           <h3 className="text-2xl font-semibold">Payload Blogy</h3>
         </Link>
         <div className="flex items-center gap-4">
-          {navLinks.map(({ link, label }) => (
-            <NavLink label={label} link={link} />
+          {navLinks.map(({ label, link }) => (
+            <NavLink key={link} label={label} link={link} />
           ))}
         </div>
       </nav>
