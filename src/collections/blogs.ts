@@ -1,4 +1,4 @@
-import type { CollectionConfig } from "payload"
+import type { CollectionConfig } from "payload";
 
 export const Blogs: CollectionConfig = {
   slug: "blogs",
@@ -31,11 +31,13 @@ export const Blogs: CollectionConfig = {
       type: "array",
       fields: [
         {
-          name: "name",
-          type: "text",
+          name: "tag",
+          type: "relationship",
+          relationTo: "tags",
         },
       ],
       required: true,
+      minRows: 1,
     },
     {
       name: "uploadedBy",
@@ -54,11 +56,11 @@ export const Blogs: CollectionConfig = {
       ({ req, operation, data }) => {
         if (operation === "create") {
           if (req.user) {
-            data.uploadedBy = req.user.id
-            return data
+            data.uploadedBy = req.user.id;
+            return data;
           }
         }
       },
     ],
   },
-}
+};
