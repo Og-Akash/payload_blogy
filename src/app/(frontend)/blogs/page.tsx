@@ -1,7 +1,9 @@
-import React from "react";
+import React, { use } from "react";
 import BlogSearchClient from "@/components/BlogSearchClient";
+import { getCollectionData } from "@/helpers/payload";
 
 const Blogs = () => {
+  const tagResult = use(getCollectionData("tags"));
   return (
     <div className="flex flex-col gap-4">
       <div className="max-w-xl">
@@ -10,7 +12,7 @@ const Blogs = () => {
           Insights, tutorials, and thoughts on web development, design, and technology
         </p>
       </div>
-      <BlogSearchClient />
+      <BlogSearchClient tags={tagResult?.docs || []} />
     </div>
   );
 };

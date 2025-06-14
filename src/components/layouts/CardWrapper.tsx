@@ -15,7 +15,7 @@ const CardWrapper = ({ blogs }: { blogs: Blog[] }) => {
               <Card
                 key={blog.id}
                 title={blog.title}
-                content={"thiss is shfshfhsd hfhsdfsgf gsdgfgdgfd dgfgdfge8ergeggsdgf"}
+                description={blog.description}
                 author={author}
                 createdAt={blog.createdAt}
                 poster={poster || ""}

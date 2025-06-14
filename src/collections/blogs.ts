@@ -16,6 +16,11 @@ export const Blogs: CollectionConfig = {
       required: true,
     },
     {
+      name: "description",
+      type: "text",
+      required: true,
+    },
+    {
       name: "content",
       type: "richText",
       required: true,

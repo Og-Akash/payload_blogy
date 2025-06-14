@@ -7,10 +7,11 @@ import CardWrapper from "./layouts/CardWrapper";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { getBlogsByQuery } from "@/helpers/payload";
-import { Blog } from "@/payload-types";
+import { Blog, Tag } from "@/payload-types";
 import { useDebounce } from "@/hooks/useDebounce";
+import Filter from "./Filter";
 
-const BlogSearchClient = () => {
+const BlogSearchClient = ({ tags }: { tags: Tag[] }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -52,9 +53,11 @@ const BlogSearchClient = () => {
           className="w-[20rem] border border-gray-500"
           placeholder="Serach your blogs"
         />
-        <span className="grid size-10 cursor-pointer place-items-center transition-colors duration-300 hover:bg-gray-700">
-          <SlidersHorizontal size={`20px`} />
-        </span>
+        <Filter tags={tags}>
+          <span className="grid size-10 cursor-pointer place-items-center transition-colors duration-300 hover:bg-gray-700">
+            <SlidersHorizontal size={`20px`} />
+          </span>
+        </Filter>
       </div>
       {loading ? "Loading..." : <CardWrapper blogs={blogs} />}
     </>

@@ -6,7 +6,7 @@ import Avatar from "./avatar";
 
 interface CardProps {
   title: string;
-  content: string;
+  description: string;
   author?: string;
   poster: string;
   createdAt: string;
@@ -14,7 +14,7 @@ interface CardProps {
   slug: string;
 }
 
-const Card = ({ title, content, author, poster, createdAt, alt, slug }: CardProps) => {
+const Card = ({ title, description, author, poster, createdAt, alt, slug }: CardProps) => {
   return (
     <div
       aria-label={title}
@@ -28,9 +28,9 @@ const Card = ({ title, content, author, poster, createdAt, alt, slug }: CardProp
         <Image src={poster} alt={alt} fill className="object-cover" />
       </div>
 
-      <div className="flex flex-col gap-1 px-1">
+      <div className="flex flex-col gap-3 px-1">
         <h3 className="line-clamp-2 text-lg font-semibold tracking-tight">{title}</h3>
-        <span className="line-clamp-2 text-sm text-gray-300">{content}</span>
+        <span className="line-clamp-2 text-sm text-gray-300">{description}</span>
       </div>
       <div className="mt-3 flex items-center justify-between gap-2">
         <div className="flex items-center gap-2 text-sm text-gray-300">
