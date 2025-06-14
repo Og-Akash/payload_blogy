@@ -1,0 +1,64 @@
+"use client";
+
+import React, { useEffect, useState } from "react";
+import Input from "./ui/Input";
+import { SlidersHorizontal } from "lucide-react";
+import CardWrapper from "./layouts/CardWrapper";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { getBlogsByQuery } from "@/helpers/payload";
+import { Blog } from "@/payload-types";
+import { useDebounce } from "@/hooks/useDebounce";
+
+const BlogSearchClient = () => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const searchQuery = searchParams.get("query") || "";
+  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [loading, setLoading] = useState(false);
+  const debouceValue = useDebounce(searchQuery);
+
+  // Fetch blogs using the debounced value
+  useEffect(() => {
+    setLoading(true);
+    const fetchBlogs = async () => {
+      const res = await fetch(`/api/blogs?query=${debouceValue}`);
+      const data = await res.json();
+      setBlogs(data.docs);
+    };
+
+    fetchBlogs().finally(() => setLoading(false));
+  }, [debouceValue]);
+
+  // Update search param on input change (no debounce)
+  const handleSearchChange = (value: string) => {
+    const params = new URLSearchParams(window.location.search);
+    if (value) {
+      params.set("query", value);
+    } else {
+      params.delete("query");
+    }
+
+    router.push(`?${params.toString()}`, { scroll: false });
+  };
+
+  return (
+    <>
+      <div className="flex items-center justify-end gap-4 px-4 py-2">
+        <Input
+          defaultValue={searchQuery}
+          onChange={(e) => handleSearchChange(e.target.value)}
+          className="w-[20rem] border border-gray-500"
+          placeholder="Serach your blogs"
+        />
+        <span className="grid size-10 cursor-pointer place-items-center transition-colors duration-300 hover:bg-gray-700">
+          <SlidersHorizontal size={`20px`} />
+        </span>
+      </div>
+      {loading ? "Loading..." : <CardWrapper blogs={blogs} />}
+    </>
+  );
+};
+
+export default BlogSearchClient;

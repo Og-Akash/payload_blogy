@@ -6,7 +6,7 @@ type PayloadFindOptions = Parameters<Payload["find"]>[0];
 
 export async function getCollectionData(
   collectionName: CollectionSlug,
-  params: Omit<PayloadFindOptions, "collection">,
+  params?: Omit<PayloadFindOptions, "collection">,
 ) {
   try {
     const document = await payload.find({
@@ -22,7 +22,7 @@ export async function getCollectionData(
 /**
  * @param slug the slug of the page
  * @param params additional paramemeters to pass
- * @returns 
+ * @returns
  */
 
 export async function getPageBySlug(slug: string, params?: Omit<PayloadFindOptions, "collection">) {
@@ -41,3 +41,26 @@ export async function getPageBySlug(slug: string, params?: Omit<PayloadFindOptio
     console.log("Failed to get the Page", slug);
   }
 }
+
+/**
+ *
+ * @param searchQuery query which tires to match with the blogs title
+ * @returns
+ */
+export const getBlogsByQuery = async (searchQuery?: string) => {
+  try {
+    return await payload.find({
+      collection: "blogs",
+      where: searchQuery
+        ? {
+            title: {
+              contains: searchQuery,
+            },
+          }
+        : {},
+      sort: "-createdAt",
+    });
+  } catch (error) {
+    console.log("Failed to get blogs of query ", searchQuery);
+  }
+};

@@ -72,6 +72,7 @@ export interface Config {
     blogs: Blog;
     pages: Page;
     navlink: Navlink;
+    tags: Tag;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -83,6 +84,7 @@ export interface Config {
     blogs: BlogsSelect<false> | BlogsSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     navlink: NavlinkSelect<false> | NavlinkSelect<true>;
+    tags: TagsSelect<false> | TagsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -181,11 +183,21 @@ export interface Blog {
   };
   poster: number | Media;
   tags: {
-    name?: string | null;
+    tag?: (number | null) | Tag;
     id?: string | null;
   }[];
   uploadedBy?: (number | null) | User;
   slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags".
+ */
+export interface Tag {
+  id: number;
+  label?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -253,6 +265,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'navlink';
         value: number | Navlink;
+      } | null)
+    | ({
+        relationTo: 'tags';
+        value: number | Tag;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -342,7 +358,7 @@ export interface BlogsSelect<T extends boolean = true> {
   tags?:
     | T
     | {
-        name?: T;
+        tag?: T;
         id?: T;
       };
   uploadedBy?: T;
@@ -388,6 +404,15 @@ export interface NavlinkSelect<T extends boolean = true> {
   label?: T;
   link?: T;
   openInNewTab?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags_select".
+ */
+export interface TagsSelect<T extends boolean = true> {
+  label?: T;
   updatedAt?: T;
   createdAt?: T;
 }

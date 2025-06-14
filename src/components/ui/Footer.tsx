@@ -16,8 +16,8 @@ const Footer = () => {
   const navLinks = navLinksResult?.docs as Navlink[];
 
   return (
-    <footer className="container mx-auto flex items-center justify-center gap-10 p-4">
-      <span>&copy; All Rights Reserverd {new Date().getFullYear()}</span>
+    <footer className="container mx-auto flex max-sm:flex-col items-center justify-center gap-2 md:gap-10 p-4">
+      <span className="text-lg">&copy; All Rights Reserverd {new Date().getFullYear()}</span>
       <div className="flex items-center gap-4">
         {navLinks.map(({ link, label }) => (
           <NavLink key={link} label={label} link={link} />
