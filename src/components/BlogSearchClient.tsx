@@ -10,6 +10,7 @@ import { getBlogsByQuery } from "@/helpers/payload";
 import { Blog, Tag } from "@/payload-types";
 import { useDebounce } from "@/hooks/useDebounce";
 import Filter from "./Filter";
+import CardLoader from "./loader/card-loader";
 
 const BlogSearchClient = ({ tags }: { tags: Tag[] }) => {
   const searchParams = useSearchParams();
@@ -59,7 +60,15 @@ const BlogSearchClient = ({ tags }: { tags: Tag[] }) => {
           </span>
         </Filter>
       </div>
-      {loading ? "Loading..." : <CardWrapper blogs={blogs} />}
+      {loading ? (
+        <div className="grid place-items-center gap-3 md:grid-cols-3 lg:grid-cols-4">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <CardLoader />
+          ))}
+        </div>
+      ) : (
+        <CardWrapper blogs={blogs} />
+      )}
     </>
   );
 };
