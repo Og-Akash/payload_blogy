@@ -1,13 +1,15 @@
 import type { CollectionConfig } from "payload";
 
-export const Blogs: CollectionConfig = {
-  slug: "blogs",
+export const Articles: CollectionConfig = {
+  slug: "articles",
   admin: {
     useAsTitle: "title",
   },
   access: {
     create: () => true,
     read: () => true,
+    update: () => true,
+    delete: () => true,
   },
   fields: [
     {
@@ -32,19 +34,6 @@ export const Blogs: CollectionConfig = {
       required: true,
     },
     {
-      name: "tags",
-      type: "array",
-      fields: [
-        {
-          name: "tag",
-          type: "relationship",
-          relationTo: "tags",
-        },
-      ],
-      required: true,
-      minRows: 1,
-    },
-    {
       name: "uploadedBy",
       type: "relationship",
       relationTo: "users",
@@ -56,16 +45,4 @@ export const Blogs: CollectionConfig = {
       required: true,
     },
   ],
-  hooks: {
-    beforeChange: [
-      ({ req, operation, data }) => {
-        if (operation === "create") {
-          if (req.user) {
-            data.uploadedBy = req.user.id;
-            return data;
-          }
-        }
-      },
-    ],
-  },
 };

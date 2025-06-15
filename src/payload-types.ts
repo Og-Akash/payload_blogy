@@ -69,10 +69,11 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
-    blogs: Blog;
+    articles: Article;
     pages: Page;
     navlink: Navlink;
     tags: Tag;
+    faqs: Faq;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -81,10 +82,11 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
-    blogs: BlogsSelect<false> | BlogsSelect<true>;
+    articles: ArticlesSelect<false> | ArticlesSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     navlink: NavlinkSelect<false> | NavlinkSelect<true>;
     tags: TagsSelect<false> | TagsSelect<true>;
+    faqs: FaqsSelect<false> | FaqsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -161,9 +163,9 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "blogs".
+ * via the `definition` "articles".
  */
-export interface Blog {
+export interface Article {
   id: number;
   title: string;
   description: string;
@@ -183,22 +185,8 @@ export interface Blog {
     [k: string]: unknown;
   };
   poster: number | Media;
-  tags: {
-    tag?: (number | null) | Tag;
-    id?: string | null;
-  }[];
   uploadedBy?: (number | null) | User;
   slug: string;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "tags".
- */
-export interface Tag {
-  id: number;
-  label?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -242,6 +230,40 @@ export interface Navlink {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags".
+ */
+export interface Tag {
+  id: number;
+  label?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Manage Frequently Asked Questions here.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faqs".
+ */
+export interface Faq {
+  id: number;
+  /**
+   * Lower numbers display first
+   */
+  order: number;
+  question: string;
+  /**
+   * Add formatting for your answer.
+   */
+  answer: string;
+  /**
+   * If left blank, auto-generated from question.
+   */
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -256,8 +278,8 @@ export interface PayloadLockedDocument {
         value: number | Media;
       } | null)
     | ({
-        relationTo: 'blogs';
-        value: number | Blog;
+        relationTo: 'articles';
+        value: number | Article;
       } | null)
     | ({
         relationTo: 'pages';
@@ -270,6 +292,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'tags';
         value: number | Tag;
+      } | null)
+    | ({
+        relationTo: 'faqs';
+        value: number | Faq;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -350,19 +376,13 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "blogs_select".
+ * via the `definition` "articles_select".
  */
-export interface BlogsSelect<T extends boolean = true> {
+export interface ArticlesSelect<T extends boolean = true> {
   title?: T;
   description?: T;
   content?: T;
   poster?: T;
-  tags?:
-    | T
-    | {
-        tag?: T;
-        id?: T;
-      };
   uploadedBy?: T;
   slug?: T;
   updatedAt?: T;
@@ -415,6 +435,18 @@ export interface NavlinkSelect<T extends boolean = true> {
  */
 export interface TagsSelect<T extends boolean = true> {
   label?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faqs_select".
+ */
+export interface FaqsSelect<T extends boolean = true> {
+  order?: T;
+  question?: T;
+  answer?: T;
+  slug?: T;
   updatedAt?: T;
   createdAt?: T;
 }

@@ -17,7 +17,7 @@ const Footer = () => {
 
   return (
     <footer className="container mx-auto flex max-sm:flex-col items-center justify-center gap-2 md:gap-10 p-4">
-      <span className="text-lg">&copy; All Rights Reserverd {new Date().getFullYear()}</span>
+      <span className="text-[16px]">&copy; All Rights Reserverd {new Date().getFullYear()}</span>
       <div className="flex items-center gap-4">
         {navLinks.map(({ link, label }) => (
           <NavLink key={link} label={label} link={link} />

@@ -7,7 +7,7 @@ import { buildConfig } from "payload";
 import { fileURLToPath } from "url";
 import sharp from "sharp";
 
-import { Blogs, Media, NavLink, Pages, Users, Tags } from "@/collections";
+import { Media, NavLink, Pages, Users, Tags, Faqs, Articles } from "@/collections";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -20,7 +20,7 @@ export default buildConfig({
     },
   },
   cors: ["*"],
-  collections: [Users, Media, Blogs, Pages, NavLink, Tags],
+  collections: [Users, Media, Articles, Pages, NavLink, Tags, Faqs],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {

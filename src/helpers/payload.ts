@@ -50,7 +50,7 @@ export async function getPageBySlug(slug: string, params?: Omit<PayloadFindOptio
 export const getBlogsByQuery = async (searchQuery?: string) => {
   try {
     return await payload.find({
-      collection: "blogs",
+      collection: "articles",
       where: searchQuery
         ? {
             title: {
