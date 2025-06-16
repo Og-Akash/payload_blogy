@@ -15,7 +15,7 @@ export async function getCollectionData(
     });
     return document;
   } catch (error) {
-    console.log("Failed to get the Data of Collection", collectionName);
+    console.log("Failed to get the Data of Collection", error);
   }
 }
 
@@ -38,7 +38,7 @@ export async function getPageBySlug(slug: string, params?: Omit<PayloadFindOptio
     });
     return result.docs;
   } catch (error) {
-    console.log("Failed to get the Page", slug);
+    console.log("Failed to get the Page", error);
   }
 }
 
@@ -54,7 +54,7 @@ export async function getDocuemnt(collection: CollectionSlug, slug: string){
    })
    return res.docs[0]
  } catch (error) {
-  console.log("Failed to get the Docuement", slug);
+  console.log("Failed to get the Docuement", error);
  }
 };
 
@@ -76,6 +76,6 @@ export const getBlogsByQuery = async (searchQuery?: string) => {
       sort: "-createdAt",
     });
   } catch (error) {
-    console.log("Failed to get blogs of query ", searchQuery);
+    console.log("Failed to get blogs of query ", error);
   }
 };

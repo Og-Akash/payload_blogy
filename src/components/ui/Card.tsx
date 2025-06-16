@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React from "react";
-import Badge from "./badge";
 import Link from "next/link";
 import Avatar from "./avatar";
 

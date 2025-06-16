@@ -7,9 +7,9 @@ import { notFound } from "next/navigation";
 import React from "react";
 
 type SingleBlugProps = {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 };
 
 const page = async ({ params }: SingleBlugProps) => {

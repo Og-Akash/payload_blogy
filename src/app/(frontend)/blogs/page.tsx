@@ -1,4 +1,4 @@
-import React, { use } from "react";
+import React, { Suspense, use } from "react";
 import BlogSearchClient from "@/components/BlogSearchClient";
 import { getCollectionData } from "@/helpers/payload";
 
@@ -12,7 +12,9 @@ const Blogs = () => {
           Insights, tutorials, and thoughts on web development, design, and technology
         </p>
       </div>
-      <BlogSearchClient tags={tagResult?.docs || []} />
+      <Suspense fallback={"loading..."}>
+        <BlogSearchClient tags={tagResult?.docs || []} />
+      </Suspense>
     </div>
   );
 };

@@ -12,7 +12,7 @@ const Header = () => {
     }),
   );
 
-  if (!navLinksResult) null;
+  if (!navLinksResult) return null;
 
   const navLinks = navLinksResult?.docs as Navlink[];
 

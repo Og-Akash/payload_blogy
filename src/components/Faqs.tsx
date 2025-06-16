@@ -2,17 +2,24 @@ import { getCollectionData } from "@/helpers/payload";
 import React, { use } from "react";
 import * as Accordion from "@radix-ui/react-accordion";
 import { ChevronDown } from "lucide-react";
+import { Faq } from "@/payload-types";
 
 const Faqs = () => {
-  const faqResults = use(getCollectionData("faqs"));
+  const faqResults = use(
+    getCollectionData("faqs", {
+      sort: "-createdAt",
+    }),
+  );
   if (!faqResults || !faqResults.docs) return null;
+
+  const faqs = faqResults.docs as Faq[];
 
   return (
     <section aria-label="FAQs" className="mx-auto w-full max-w-3xl p-1 md:p-4">
-      <h2 className="mb-6 text-center text-xl md:text-2xl font-bold">Frequently Asked Questions</h2>
+      <h2 className="mb-6 text-center text-xl font-bold md:text-2xl">Frequently Asked Questions</h2>
 
       <Accordion.Root type="multiple" className="space-y-4">
-        {faqResults.docs.map((faq: any, index: number) => (
+        {faqs.map((faq, index) => (
           <Accordion.Item
             key={faq.id || index}
             value={`faq-${index}`}

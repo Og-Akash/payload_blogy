@@ -4,13 +4,13 @@ import { Loader2, Send } from "lucide-react";
 import React from "react";
 
 interface FormProps {
-  handleSubmit: () => void;
-  handleChange: () => void;
+  handleSubmit: (e: React.FormEvent) => Promise<void>;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   formData: { subject: string; email: string; message: string };
   isSubmitting: boolean;
 }
 
-const Form = ({ handleSubmit, handleChange, formData, isSubmitting }: any) => {
+const Form = ({ handleSubmit, handleChange, formData, isSubmitting }: FormProps) => {
   return (
     <form onSubmit={handleSubmit} className="w-full max-w-3xl space-y-4">
       <Input

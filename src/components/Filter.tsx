@@ -7,7 +7,7 @@ import {
 import Badge from "./ui/badge";
 import { Tag } from "@/payload-types";
 
-const Filter = ({ children, tags }: { children: React.ReactNode; tags: Tag[] }) => {
+const Filter = ({ children }: { children: React.ReactNode; tags: Tag[] }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>{children}</DropdownMenuTrigger>
