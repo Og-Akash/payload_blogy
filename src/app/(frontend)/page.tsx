@@ -18,8 +18,6 @@ export default function HomePage() {
 
   const { heading, subHeading, cta_buttons, heroImage } = pageData[0].layout[0];
 
-  console.log("pageData", pageData);
-
   return (
     <div className="mx-auto mt-8 flex max-w-xl flex-col items-center justify-center gap-4 text-center">
       <h1 className="m-0! leading-10 tracking-wide">{heading}</h1>
