@@ -1,5 +1,5 @@
-// storage-adapter-import-placeholder
 import { postgresAdapter } from "@payloadcms/db-postgres";
+import { payloadCloudinaryPlugin } from "@jhb.software/payload-cloudinary-plugin";
 import { payloadCloudPlugin } from "@payloadcms/payload-cloud";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import path from "path";
@@ -7,7 +7,7 @@ import { buildConfig } from "payload";
 import { fileURLToPath } from "url";
 import sharp from "sharp";
 
-import { Media, NavLink, Pages, Users, Tags, Faqs, Blogs, Feedbacks } from "@/collections";
+import { Media, NavLink, Pages, Users, Tags, Faqs, Articles, Feedbacks } from "@/collections";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -20,7 +20,7 @@ export default buildConfig({
     },
   },
   cors: ["*"],
-  collections: [Users, Media, Blogs, Pages, NavLink, Tags, Faqs, Feedbacks],
+  collections: [Users, Media, Articles, Pages, NavLink, Tags, Faqs, Feedbacks],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {
@@ -34,7 +34,17 @@ export default buildConfig({
   sharp,
   plugins: [
     payloadCloudPlugin(),
-    // storage-adapter-placeholder
+    payloadCloudinaryPlugin({
+      uploadCollections: ["media"],
+      credentials: {
+        apiKey: process.env.CLOUDINARY_API_KEY!,
+        apiSecret: process.env.CLOUDINARY_API_SECRET!,
+      },
+      cloudinary: {
+        cloudName: process.env.CLOUDINARY_CLOUD_NAME!,
+        folder: process.env.CLOUDINARY_FOLDER_NAME
+      },
+    }),
   ],
   debug: process.env.PAYLOAD_DEBUG === "true",
 });

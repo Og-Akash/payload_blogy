@@ -15,6 +15,7 @@
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start"
   },
   "dependencies": {
+    "@jhb.software/payload-cloudinary-plugin": "^0.2.1",
     "@payloadcms/db-postgres": "3.40.0",
     "@payloadcms/next": "3.40.0",
     "@payloadcms/payload-cloud": "3.40.0",

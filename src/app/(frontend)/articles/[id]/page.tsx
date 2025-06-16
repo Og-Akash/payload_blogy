@@ -1,6 +1,6 @@
 import { isMedia } from "@/helpers";
 import { getDocuemnt } from "@/helpers/payload";
-import { Blog } from "@/payload-types";
+import { Article } from "@/payload-types";
 import { RichText } from "@payloadcms/richtext-lexical/react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -14,7 +14,7 @@ type SingleBlugProps = {
 
 const page = async ({ params }: SingleBlugProps) => {
   const { id } = await params;
-  const singleBlogData = (await getDocuemnt("blogs", id)) as Blog;
+  const singleBlogData = (await getDocuemnt("articles", id)) as Article;
 
   if (!singleBlogData) notFound();
 

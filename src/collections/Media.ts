@@ -1,4 +1,3 @@
-import path from "path";
 import type { CollectionConfig } from "payload";
 
 export const Media: CollectionConfig = {
@@ -26,7 +25,6 @@ export const Media: CollectionConfig = {
     },
   ],
   upload: {
-    staticDir: "media",
     mimeTypes: ["image/*", "video/*"],
   },
 };

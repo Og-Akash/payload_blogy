@@ -29,7 +29,7 @@ const Header = () => {
               width={30}
             />
           </picture>
-          <h3 className="hidden md:block text-2xl font-semibold">Payload Blogy</h3>
+          <h3 className="hidden md:block text-2xl font-semibold">Payload Articles</h3>
         </Link>
         <div className="flex items-center gap-4">
           {navLinks.map(({ label, link }) => (

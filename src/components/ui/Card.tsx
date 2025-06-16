@@ -19,7 +19,7 @@ const Card = ({ title, description, author, poster, createdAt, alt, slug }: Card
       aria-label={title}
       className="relative flex w-[18rem] flex-col space-y-2 rounded-md bg-gray-800/80 p-3"
     >
-      <Link href={`/blogs/${slug}`} className="absolute inset-0 z-10">
+      <Link href={`/articles/${slug}`} className="absolute inset-0 z-10">
         <span className="sr-only">{title}</span>
       </Link>
 

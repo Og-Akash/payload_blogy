@@ -6,7 +6,7 @@ import { SlidersHorizontal } from "lucide-react";
 import CardWrapper from "./layouts/CardWrapper";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { Blog, Tag } from "@/payload-types";
+import { Article, Tag } from "@/payload-types";
 import { useDebounce } from "@/hooks/useDebounce";
 import Filter from "./Filter";
 import CardLoader from "./loader/card-loader";
@@ -16,7 +16,7 @@ const BlogSearchClient = ({ tags }: { tags: Tag[] }) => {
   const router = useRouter();
 
   const searchQuery = searchParams.get("query") || "";
-  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(false);
   const debouceValue = useDebounce(searchQuery);
 
@@ -24,9 +24,9 @@ const BlogSearchClient = ({ tags }: { tags: Tag[] }) => {
   useEffect(() => {
     setLoading(true);
     const fetchBlogs = async () => {
-      const res = await fetch(`/api/blogs?query=${debouceValue}`);
+      const res = await fetch(`/api/articles?query=${debouceValue}`);
       const data = await res.json();
-      setBlogs(data.docs);
+      setArticles(data.docs);
     };
 
     fetchBlogs().finally(() => setLoading(false));
@@ -66,7 +66,7 @@ const BlogSearchClient = ({ tags }: { tags: Tag[] }) => {
           ))}
         </div>
       ) : (
-        <CardWrapper blogs={blogs} />
+        <CardWrapper articles={articles} />
       )}
     </>
   );
