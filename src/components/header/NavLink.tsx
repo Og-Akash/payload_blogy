@@ -10,7 +10,7 @@ const NavLink = ({ link, label }: NavLinkProps) => {
   return (
     <Link
       className="text-sm transition-colors duration-150 hover:text-gray-300"
-      href={link}
+      href={`/${link}`}
     >
       {label}
     </Link>
