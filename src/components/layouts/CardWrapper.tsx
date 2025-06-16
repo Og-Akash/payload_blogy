@@ -1,26 +1,26 @@
 import React from "react";
 import Card from "../ui/Card";
-import { Article } from "@/payload-types";
+import { Blog } from "@/payload-types";
 
-const CardWrapper = ({ ariticles }: { ariticles: Article[] }) => {
+const CardWrapper = ({ blogs }: { blogs: Blog[] }) => {
   return (
     <>
-      {ariticles.length > 0 ? (
+      {blogs.length > 0 ? (
         <div className="grid place-items-center gap-3 md:grid-cols-3 lg:grid-cols-4">
-          {ariticles.map((article) => {
-            const author = typeof article.uploadedBy === "object" ? article?.uploadedBy?.email : "";
-            const poster = typeof article.poster === "object" ? article?.poster?.url : "";
-            const alt = typeof article.poster === "object" ? article?.poster?.alt : "";
+          {blogs.map((blog) => {
+            const author = typeof blog.uploadedBy === "object" ? blog?.uploadedBy?.email : "";
+            const poster = typeof blog.poster === "object" ? blog?.poster?.url : "";
+            const alt = typeof blog.poster === "object" ? blog?.poster?.alt : "";
             return (
               <Card
-                key={article.id}
-                title={article.title}
-                description={article.description}
+                key={blog.id}
+                title={blog.title}
+                description={blog.description}
                 author={author}
-                createdAt={article.createdAt}
+                createdAt={blog.createdAt}
                 poster={poster || ""}
                 alt={alt}
-                slug={article.slug}
+                slug={blog.slug}
               />
             );
           })}

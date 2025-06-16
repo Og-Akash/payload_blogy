@@ -69,7 +69,7 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
-    articles: Article;
+    blogs: Blog;
     pages: Page;
     navlink: Navlink;
     tags: Tag;
@@ -83,7 +83,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
-    articles: ArticlesSelect<false> | ArticlesSelect<true>;
+    blogs: BlogsSelect<false> | BlogsSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     navlink: NavlinkSelect<false> | NavlinkSelect<true>;
     tags: TagsSelect<false> | TagsSelect<true>;
@@ -165,9 +165,9 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "articles".
+ * via the `definition` "blogs".
  */
-export interface Article {
+export interface Blog {
   id: number;
   title: string;
   description: string;
@@ -292,8 +292,8 @@ export interface PayloadLockedDocument {
         value: number | Media;
       } | null)
     | ({
-        relationTo: 'articles';
-        value: number | Article;
+        relationTo: 'blogs';
+        value: number | Blog;
       } | null)
     | ({
         relationTo: 'pages';
@@ -394,9 +394,9 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "articles_select".
+ * via the `definition` "blogs_select".
  */
-export interface ArticlesSelect<T extends boolean = true> {
+export interface BlogsSelect<T extends boolean = true> {
   title?: T;
   description?: T;
   content?: T;

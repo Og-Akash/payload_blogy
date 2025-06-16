@@ -2,7 +2,6 @@ import Faqs from "@/components/Faqs";
 import { isMedia } from "@/helpers";
 import { getPageBySlug } from "@/helpers/payload";
 import { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import React, { use } from "react";
 

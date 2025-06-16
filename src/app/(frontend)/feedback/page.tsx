@@ -39,8 +39,8 @@ const FeedbackForm = () => {
       } else {
         toast.error("Error submitting feedback.");
       }
-    } catch (error) {
-      alert("Something Went Wrong!");
+    } catch (_) {
+      toast.error("Something Went Wrong!");
     } finally {
       setIsSubmitting(false);
     }

@@ -3,6 +3,13 @@ import { cn } from "@/lib/cn";
 import { Loader2, Send } from "lucide-react";
 import React from "react";
 
+interface FormProps {
+  handleSubmit: () => void;
+  handleChange: () => void;
+  formData: { subject: string; email: string; message: string };
+  isSubmitting: boolean;
+}
+
 const Form = ({ handleSubmit, handleChange, formData, isSubmitting }: any) => {
   return (
     <form onSubmit={handleSubmit} className="w-full max-w-3xl space-y-4">
