@@ -5,5 +5,6 @@ import { NavLink } from "./NavLinks";
 import { Tags } from "./Tags";
 import { Faqs } from "./Faq";
 import { Articles } from "./Article";
+import { Feedbacks } from "./Feedbacks";
 
-export { Users, Media, Pages, NavLink, Tags, Faqs, Articles };
+export { Users, Media, Pages, NavLink, Tags, Faqs, Articles, Feedbacks };

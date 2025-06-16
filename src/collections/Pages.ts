@@ -1,3 +1,4 @@
+import { Hero } from "@/blocks/Hero";
 import type { CollectionConfig } from "payload";
 
 export const Pages: CollectionConfig = {
@@ -20,46 +21,7 @@ export const Pages: CollectionConfig = {
       name: "layout",
       type: "blocks",
       required: true,
-      blocks: [
-        {
-          slug: "hero",
-          fields: [
-            {
-              name: "heading",
-              type: "text",
-              required: true,
-            },
-            {
-              name: "subHeading",
-              type: "text",
-              required: true,
-            },
-            {
-              name: "heroImage",
-              type: "upload",
-              relationTo: "media",
-              required: true,
-            },
-            {
-              name: "cta_buttons",
-              label: "Cta Button",
-              type: "array",
-              fields: [
-                {
-                  name: "label",
-                  type: "text",
-                  required: true,
-                },
-                {
-                  name: "url",
-                  type: "text",
-                  required: true,
-                },
-              ],
-            },
-          ],
-        },
-      ],
+      blocks: [Hero],
     },
   ],
 };

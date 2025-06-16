@@ -6,11 +6,10 @@ import { ChevronDown } from "lucide-react";
 const Faqs = () => {
   const faqResults = use(getCollectionData("faqs"));
   if (!faqResults || !faqResults.docs) return null;
-  console.log("faqResults", faqResults);
 
   return (
     <section aria-label="FAQs" className="mx-auto w-full max-w-3xl p-1 md:p-4">
-      <h2 className="mb-6 text-center text-lg md:text-xl font-bold">Frequently Asked Questions</h2>
+      <h2 className="mb-6 text-center text-xl md:text-2xl font-bold">Frequently Asked Questions</h2>
 
       <Accordion.Root type="multiple" className="space-y-4">
         {faqResults.docs.map((faq: any, index: number) => (

@@ -8,6 +8,11 @@
   box-sizing: border-box;
 }
 
+@theme inline {
+  /* Fonts */
+  --font-outfit: var(--font-outfit)
+}
+
 html {
   font-size: 18px;
   line-height: 32px;
@@ -23,7 +28,7 @@ body,
 }
 
 body {
-  font-family: system-ui;
+  font-family: var(--font-outfit);
   font-size: 18px;
   line-height: 32px;
 
@@ -43,9 +48,8 @@ img {
 }
 
 h1 {
-  margin: 40px 0;
-  font-size: 64px;
-  line-height: 70px;
+  margin: 30px 0;
+  font-size: 50px;
   font-weight: bold;
 
   @media (max-width: 1024px) {

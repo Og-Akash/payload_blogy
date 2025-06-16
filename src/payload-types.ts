@@ -74,6 +74,7 @@ export interface Config {
     navlink: Navlink;
     tags: Tag;
     faqs: Faq;
+    feedbacks: Feedback;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -87,6 +88,7 @@ export interface Config {
     navlink: NavlinkSelect<false> | NavlinkSelect<true>;
     tags: TagsSelect<false> | TagsSelect<true>;
     faqs: FaqsSelect<false> | FaqsSelect<true>;
+    feedbacks: FeedbacksSelect<false> | FeedbacksSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -264,6 +266,18 @@ export interface Faq {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "feedbacks".
+ */
+export interface Feedback {
+  id: number;
+  subject: string;
+  message: string;
+  email: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -296,6 +310,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'faqs';
         value: number | Faq;
+      } | null)
+    | ({
+        relationTo: 'feedbacks';
+        value: number | Feedback;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -447,6 +465,17 @@ export interface FaqsSelect<T extends boolean = true> {
   question?: T;
   answer?: T;
   slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "feedbacks_select".
+ */
+export interface FeedbacksSelect<T extends boolean = true> {
+  subject?: T;
+  message?: T;
+  email?: T;
   updatedAt?: T;
   createdAt?: T;
 }

@@ -18,7 +18,7 @@ const Header = () => {
 
   return (
     <header aria-label="site-header">
-      <nav className="container mx-auto flex items-center justify-between p-4">
+      <nav className="max-w-5xl mx-auto flex items-center justify-between p-4">
         <Link href="/" className="flex items-center gap-2">
           <picture>
             <source srcSet="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg" />
