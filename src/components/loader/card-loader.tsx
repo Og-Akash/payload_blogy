@@ -4,7 +4,7 @@ const CardLoader = () => {
   return (
     <div
       aria-label="loading-card"
-      className="relative flex w-[18rem] animate-pulse flex-col space-y-2 rounded-md bg-gray-800/80 p-3"
+      className="relative flex w-[18rem] animate-pulse flex-col space-y-2 rounded-md p-1 sm:p-3"
     >
       <div className="absolute inset-0 z-10" />
 

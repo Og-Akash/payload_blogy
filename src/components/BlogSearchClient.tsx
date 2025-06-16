@@ -46,11 +46,11 @@ const BlogSearchClient = ({ tags }: { tags: Tag[] }) => {
 
   return (
     <>
-      <div className="flex items-center justify-end gap-4 px-4 py-2">
+      <div className="flex max-sm:flex-col items-end sm:items-center justify-end gap-2 sm:gap-4 px-4 py-2">
         <Input
           defaultValue={searchQuery}
           onChange={(e) => handleSearchChange(e.target.value)}
-          className="w-[20rem] border border-gray-500"
+          className="w-[20rem] border border-gray-500 max-sm:order-2"
           placeholder="Serach your blogs"
         />
         <Filter tags={tags}>
@@ -60,7 +60,7 @@ const BlogSearchClient = ({ tags }: { tags: Tag[] }) => {
         </Filter>
       </div>
       {loading ? (
-        <div className="grid place-items-center gap-3 md:grid-cols-3 lg:grid-cols-4">
+        <div className="grid place-items-center gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {Array.from({ length: 3 }).map((_, i) => (
             <CardLoader key={i} />
           ))}

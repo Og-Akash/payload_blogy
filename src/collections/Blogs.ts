@@ -44,5 +44,20 @@ export const Blogs: CollectionConfig = {
       type: "text",
       required: true,
     },
+    {
+      name: "tags",
+      label: "Tags",
+      type: "array",
+      fields: [
+        {
+          name: "tag",
+          label: "Tag",
+          type: "relationship",
+          relationTo: "tags",
+          required: true,
+        },
+      ],
+      minRows: 1,
+    },
   ],
 };

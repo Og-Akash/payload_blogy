@@ -11,7 +11,7 @@ const Filter = ({ children, tags }: { children: React.ReactNode; tags: Tag[] }) 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>{children}</DropdownMenuTrigger>
-      <DropdownMenuContent className="min-h-[10rem] max-w-[15rem] bg-gray-800 p-3">
+      <DropdownMenuContent className="min-h-[10rem] max-w-[15rem] bg-gray-800 p-3 z-10">
         <span className="text-base font-medium mb-4 inline-block">Tags: </span>
         {/* <div className="flex flex-wrap gap-3">
           {tags.map((tag) => (

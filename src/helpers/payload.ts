@@ -54,7 +54,7 @@ export const getBlogsByQuery = async (searchQuery?: string) => {
       where: searchQuery
         ? {
             title: {
-              contains: searchQuery,
+              contains: searchQuery.toLowerCase(),
             },
           }
         : {},

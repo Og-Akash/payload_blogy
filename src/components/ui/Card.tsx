@@ -32,15 +32,15 @@ const Card = ({ title, description, author, poster, createdAt, alt, slug }: Card
         <h3 className="line-clamp-2 text-lg font-semibold tracking-tight">{title}</h3>
         <span className="line-clamp-2 text-sm text-gray-300">{description}</span>
       </div>
-      <div className="mt-3 flex items-center justify-between gap-2">
+      <div className="mt-3 flex items-center gap-2">
         <div className="flex items-center gap-2 text-sm text-gray-300">
           <Avatar text="Akash" />
-          {author && <h3>{author}</h3>}
         </div>
-        <span className="text-[14px] text-gray-400">
-          📅 {new Date(createdAt).toLocaleDateString()}
-        </span>
+        <div>{author && <h3 className="text-sm">{author}</h3>}</div>
       </div>
+      <span className="text-[14px] text-gray-400">
+        Published at: {new Date(createdAt).toLocaleDateString()}
+      </span>
     </div>
   );
 };

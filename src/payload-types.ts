@@ -189,6 +189,22 @@ export interface Blog {
   poster: number | Media;
   uploadedBy?: (number | null) | User;
   slug: string;
+  tags?:
+    | {
+        tag: number | Tag;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags".
+ */
+export interface Tag {
+  id: number;
+  label?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -227,16 +243,6 @@ export interface Navlink {
   label: string;
   link: string;
   openInNewTab?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "tags".
- */
-export interface Tag {
-  id: number;
-  label?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -403,6 +409,12 @@ export interface BlogsSelect<T extends boolean = true> {
   poster?: T;
   uploadedBy?: T;
   slug?: T;
+  tags?:
+    | T
+    | {
+        tag?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
