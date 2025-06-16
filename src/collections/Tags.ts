@@ -6,7 +6,8 @@ export const Tags: CollectionConfig = {
     useAsTitle: "label",
   },
   access: {
-    read: ()=> true
+    read: ()=> true,
+    create: () => true
   },
   fields: [
     {

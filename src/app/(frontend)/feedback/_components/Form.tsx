@@ -1,8 +1,9 @@
 import Input from "@/components/ui/Input";
-import { Send } from "lucide-react";
+import { cn } from "@/lib/cn";
+import { Loader2, Send } from "lucide-react";
 import React from "react";
 
-const Form = ({ handleSubmit, handleChange, formData }: any) => {
+const Form = ({ handleSubmit, handleChange, formData, isSubmitting }: any) => {
   return (
     <form onSubmit={handleSubmit} className="w-full max-w-3xl space-y-4">
       <Input
@@ -33,11 +34,15 @@ const Form = ({ handleSubmit, handleChange, formData }: any) => {
         className="w-full border border-gray-700/60 p-2"
       />
       <button
+        disabled={isSubmitting}
         type="submit"
-        className="group inline-flex items-center gap-1 bg-white px-4 py-1 cursor-pointer font-medium text-gray-900 shadow-sm transition-all duration-200 ease-in-out hover:bg-gray-100 hover:shadow-md"
+        className={cn(
+          "group inline-flex cursor-pointer items-center gap-1 bg-white px-4 py-1 font-medium text-gray-900 shadow-sm transition-all duration-200 ease-in-out hover:bg-gray-100 hover:shadow-md",
+          isSubmitting && "cursor-not-allowed bg-gray-300",
+        )}
       >
+        {isSubmitting ? <Loader2 className="animate-spin" /> : <Send />}
         <span>Submit Feedback</span>
-        <Send />
       </button>
     </form>
   );

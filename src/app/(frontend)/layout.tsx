@@ -3,6 +3,7 @@ import "./styles.css";
 import BaseLayout from "@/components/layouts/Base";
 import {  Outfit } from "next/font/google";
 import { cn } from "@/lib/cn";
+import { Toaster } from 'sonner';
 
 export const metadata = {
   description: "Payload Blogy is a blog application built on top of Payload CMS.",
@@ -22,6 +23,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en">
       <body className={cn("antialiased", outfit.variable)}>
         <BaseLayout>{children}</BaseLayout>
+        <Toaster richColors position="bottom-right" />
       </body>
     </html>
   );

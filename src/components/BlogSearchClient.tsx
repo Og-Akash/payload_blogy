@@ -66,8 +66,7 @@ const BlogSearchClient = ({ tags }: { tags: Tag[] }) => {
           ))}
         </div>
       ) : (
-        // <CardWrapper ariticles={ariticles} />
-        "sdfsd"
+        <CardWrapper ariticles={ariticles} />
       )}
     </>
   );

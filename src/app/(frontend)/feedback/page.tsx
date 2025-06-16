@@ -3,8 +3,10 @@
 import Header from "./_components/Header";
 import React, { useState } from "react";
 import Form from "./_components/Form";
+import { toast } from "sonner";
 
 const FeedbackForm = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     subject: "",
     message: "",
@@ -24,6 +26,7 @@ const FeedbackForm = () => {
     e.preventDefault();
 
     try {
+      setIsSubmitting(true);
       const res = await fetch("/api/feedback", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -31,20 +34,27 @@ const FeedbackForm = () => {
       });
 
       if (res.ok) {
-        alert("Thanks for your feedback!");
+        toast.success("Thanks for your feedback!");
         setFormData({ subject: "", message: "", email: "" });
       } else {
-        alert("Error submitting feedback.");
+        toast.error("Error submitting feedback.");
       }
     } catch (error) {
       alert("Something Went Wrong!");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
     <div className="mx-auto max-w-3xl space-y-8">
       <Header />
-      <Form formData={formData} handleSubmit={handleSubmit} handleChange={handleChange} />
+      <Form
+        isSubmitting={isSubmitting}
+        formData={formData}
+        handleSubmit={handleSubmit}
+        handleChange={handleChange}
+      />
     </div>
   );
 };
