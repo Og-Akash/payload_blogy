@@ -1,12 +1,12 @@
 import React from "react";
 import Card from "../ui/Card";
-import { Article } from "@/payload-types";
+import { Blog } from "@/payload-types";
 
-const CardWrapper = ({ articles }: { articles: Article[] }) => {
+const CardWrapper = ({ articles }: { articles: Blog[] }) => {
   return (
     <>
       {articles?.length > 0 ? (
-        <div className="grid place-items-center gap-3 md:grid-cols-3 lg:grid-cols-4">
+        <div className="w-full grid place-items-center gap-3 md:grid-cols-3 lg:grid-cols-4">
           {articles.map((blog) => {
             const author = typeof blog.uploadedBy === "object" ? blog?.uploadedBy?.email : "";
             const poster = typeof blog.poster === "object" ? blog?.poster?.url : "";

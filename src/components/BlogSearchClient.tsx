@@ -6,7 +6,7 @@ import { SlidersHorizontal } from "lucide-react";
 import CardWrapper from "./layouts/CardWrapper";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { Article, Tag } from "@/payload-types";
+import { Blog, Tag } from "@/payload-types";
 import { useDebounce } from "@/hooks/useDebounce";
 import Filter from "./Filter";
 import CardLoader from "./loader/card-loader";
@@ -16,7 +16,7 @@ const BlogSearchClient = ({ tags }: { tags: Tag[] }) => {
   const router = useRouter();
 
   const searchQuery = searchParams.get("query") || "";
-  const [articles, setArticles] = useState<Article[]>([]);
+  const [articles, setArticles] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(false);
   const debouceValue = useDebounce(searchQuery);
 

@@ -1,15 +1,15 @@
 import type { CollectionConfig } from "payload";
 
-export const Articles: CollectionConfig = {
-  slug: "articles",
+export const Blogs: CollectionConfig = {
+  slug: "blogs",
   admin: {
     useAsTitle: "title",
   },
   access: {
-    create: () => true,
+    create: ({ req }) => req.user?.role === "admin" || req.user?.role === "editor",
+    update: ({ req, data }) => req.user?.role === "admin" || req.user?.role === "publisher",
+    delete: ({ req }) => req.user?.role === "admin",
     read: () => true,
-    update: () => true,
-    delete: () => true,
   },
   fields: [
     {
@@ -34,9 +34,23 @@ export const Articles: CollectionConfig = {
       required: true,
     },
     {
+      name: "status",
+      type: "select",
+      defaultValue: "draft",
+      options: ["draft", "published"],
+      access: {
+        update: ({ req }) => req.user?.role === "admin" || req.user?.role === "publisher",
+        create: ({ req }) => req.user?.role === "admin" || req.user?.role === "publisher",
+      },
+    },
+    {
       name: "uploadedBy",
       type: "relationship",
       relationTo: "users",
+      required: true,
+      access: {
+        update: ({ req }) => req.user?.role === "admin",
+      },
     },
     {
       name: "slug",
@@ -60,4 +74,17 @@ export const Articles: CollectionConfig = {
       minRows: 1,
     },
   ],
+  hooks: {
+    beforeChange: [
+      ({ operation, req, data }) => {
+        if (operation === "create" && req.user) {
+          return {
+            ...data,
+            uploadedBy: req.user.id,
+          };
+        }
+        return data;
+      },
+    ],
+  },
 };

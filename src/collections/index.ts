@@ -4,7 +4,7 @@ import { Pages } from "./Pages";
 import { NavLink } from "./NavLinks";
 import { Tags } from "./Tags";
 import { Faqs } from "./Faq";
-import { Articles } from "./Articles";
+import { Blogs } from "./Articles"
 import { Feedbacks } from "./Feedbacks";
 
-export { Users, Media, Pages, NavLink, Tags, Faqs, Articles, Feedbacks };
+export { Users, Media, Pages, NavLink, Tags, Faqs, Blogs, Feedbacks };

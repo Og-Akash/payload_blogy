@@ -7,7 +7,7 @@ import { buildConfig } from "payload";
 import { fileURLToPath } from "url";
 import sharp from "sharp";
 
-import { Media, NavLink, Pages, Users, Tags, Faqs, Articles, Feedbacks } from "@/collections";
+import { Media, NavLink, Pages, Users, Tags, Faqs, Blogs, Feedbacks } from "@/collections";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -15,12 +15,16 @@ const dirname = path.dirname(filename);
 export default buildConfig({
   admin: {
     user: Users.slug,
+    autoLogin: {
+      email: "user+publisher@gmail.com",
+      password: "userpublisher",
+    },
     importMap: {
       baseDir: path.resolve(dirname),
     },
   },
   cors: ["*"],
-  collections: [Users, Media, Articles, Pages, NavLink, Tags, Faqs, Feedbacks],
+  collections: [Users, Media, Blogs, Pages, NavLink, Tags, Faqs, Feedbacks],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {
@@ -42,7 +46,7 @@ export default buildConfig({
       },
       cloudinary: {
         cloudName: process.env.CLOUDINARY_CLOUD_NAME!,
-        folder: process.env.CLOUDINARY_FOLDER_NAME
+        folder: process.env.CLOUDINARY_FOLDER_NAME,
       },
     }),
   ],

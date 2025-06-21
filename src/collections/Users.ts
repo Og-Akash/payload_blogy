@@ -6,12 +6,20 @@ export const Users: CollectionConfig = {
     useAsTitle: "email",
   },
   access: {
-    read: () => true,
-    create: () => true,
+    read: ({req}) => req.user?.role === "admin",
   },
   auth: true,
   fields: [
-    // Email added by default
-    // Add more fields as needed
+    {
+      name: "role",
+      type: "select",
+      required: true,
+      defaultValue: "editor",
+      options: [
+           { label: 'Editor', value: 'editor' },
+        { label: 'Publisher', value: 'publisher' },
+        { label: 'Admin', value: 'admin' },
+      ]
+    }
   ],
 };

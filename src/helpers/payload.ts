@@ -42,21 +42,21 @@ export async function getPageBySlug(slug: string, params?: Omit<PayloadFindOptio
   }
 }
 
-export async function getDocuemnt(collection: CollectionSlug, slug: string){
- try {
-  const res = await payload.find({
-     collection: collection,
-     where: {
-         slug: {
-           equals: slug,
-         },
-       },
-   })
-   return res.docs[0]
- } catch (error) {
-  console.log("Failed to get the Docuement", error);
- }
-};
+export async function getDocuemnt(collection: CollectionSlug, slug: string) {
+  try {
+    const res = await payload.find({
+      collection: collection,
+      where: {
+        slug: {
+          equals: slug,
+        },
+      },
+    });
+    return res.docs[0];
+  } catch (error) {
+    console.log("Failed to get the Docuement", error);
+  }
+}
 
 /**
  * @param searchQuery query which tires to match with the blogs title
@@ -65,14 +65,27 @@ export async function getDocuemnt(collection: CollectionSlug, slug: string){
 export const getBlogsByQuery = async (searchQuery?: string) => {
   try {
     return await payload.find({
-      collection: "articles",
+      collection: "blogs",
       where: searchQuery
         ? {
-            title: {
-              contains: searchQuery.toLowerCase(),
-            },
+            and: [
+              {
+                title: {
+                  contains: searchQuery.toLowerCase(),
+                },
+              },
+              {
+                status: {
+                  equals: "published",
+                },
+              },
+            ],
           }
-        : {},
+        : {
+            status: {
+              equals: "published",
+            },
+          },
       sort: "-createdAt",
     });
   } catch (error) {
